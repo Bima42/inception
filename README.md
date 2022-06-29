@@ -87,6 +87,7 @@ This project is an introduction to Docker. You will find here some docs concerni
 - **docker-compose.yml**: required file that will serve as a guide to run the containers correctly
 - used to describe different containers
 *Example of docker-compose.yml file*
+
 ![docker-compose](/docs/exemple_docker_compose.png)
 
 ## Virtualization / Containers
