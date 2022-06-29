@@ -1,7 +1,7 @@
 # Inception
 This project is an introduction to Docker. You will find here some docs concerning Docker.
 
-## Docker
+# Docker
 - It's an open source containerization platform.
 - Enables developers to package applications into containers—standardized executable components combining application source code with the operating system (OS) libraries and dependencies required to run that code in any environment.
 - Based on LCX (LinuX Containers).
@@ -78,7 +78,7 @@ This project is an introduction to Docker. You will find here some docs concerni
 - On the port that will be mentioned that the container will be accessible when a **docker run** command is executed.
 - Port exposed using the EXPOSE command can be overridden using the **docker run -p** command.
 
-### CMD / ENTRYPOINT
+#### CMD / ENTRYPOINT
 - CMD allows you to perform an action without the need for additional parameters
 - ENTRYPOINT is unchangeable and performs the same action throughout container activation. In this case, it acts as an executable file.
 
