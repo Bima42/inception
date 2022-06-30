@@ -22,6 +22,7 @@ This project is an introduction to Docker. You will find here some docs concerni
 > docker inspect [container] # Show container config
 > docker build -t [image] .  # Build image from Dockerfile
 > docker history [image]     # View layers of image
+> docker system prune        # Clear system
 
 /// DOCKER COMPOSE ///
 > docker-compose up          # Launch group of containers
@@ -86,6 +87,7 @@ This project is an introduction to Docker. You will find here some docs concerni
 - Allows you to start multiple containers at the same time
 - **docker-compose.yml**: required file that will serve as a guide to run the containers correctly
 - used to describe different containers
+
 *Example of docker-compose.yml file*
 
 ![docker-compose](/docs/exemple_docker_compose.png)
