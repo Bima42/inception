@@ -9,11 +9,17 @@ This project is an introduction to Docker. You will find here some docs concerni
 
 ## Docker Commands
 ```
+/// Basic Commands ///
 > docker login               # Connect to registry
+> docker logout              # Disonnect
 > docker search [name]       # Search image
 > docker pull [image]        # Pull image
 > docker push [image]        # Push image to registry
 
+
+/// Main Commands ///
+> docker build	             # Build an image from a Dockerfile
+> docker create	             # Create a new container
 > docker ps                  # View active containers
 > docker ps -a               # View all containers
 > docker rm [container]      # Delete inactive container
@@ -22,14 +28,47 @@ This project is an introduction to Docker. You will find here some docs concerni
 > docker inspect [container] # Show container config
 > docker build -t [image] .  # Build image from Dockerfile
 > docker history [image]     # View layers of image
+> docker inspect             # Return low-level information on Docker objects
+> docker run                 # Run a command in a new container
+> docker info                # Display system-wide information
 > docker system prune        # Clear system
+
 
 /// DOCKER COMPOSE ///
 > docker-compose up          # Launch group of containers
 > docker-compose up -d       # Launch group of containers in background
 > docker-compose down        # Stop processes
-> docker-compose exec [service] [command] # Execute command inside service
+> docker-compose exec        # Execute command inside service
+
+
+/// Manage /// 
+> docker config              # Manage Docker configs
+> docker container           # Manage containers
+> docker volume              # Manage volumes
+> docker image               # Manage images
+> docker service             # Manage services
+> docker stack               # Manage Docker stacks
+> docker network             # Manage networks
+> docker plugin              # Manage plugins
+> docker system              # Manage Docker
+
+
+/// More Commands ///
+> docker cp                  # Copy files/folders between a container and the local filesystem
+> docker exec                # Run a command in a running container
+> docker history             # Show the history of an image
+> docker kill                # Kill one or more running containers
+> docker port                # List port mappings or a specific mapping for the container
+> docker rename              # Rename a container
+> docker restart             # Restart one or more containers
+> docker search              # Search the Docker Hub for images
+> docker start               # Start one or more stopped containers
+> docker stats               # Display a live stream of container(s) resource usage statistics
+> docker stop                # Stop one or more running containers
+
 ```
+And [more](https://docs.docker.com/engine/reference/commandline/docker/) ... 
+
 ## Dockerfile
 - contains the necessary instructions to build a docker image
 - instructions describe the actions the image should perform once it is created
