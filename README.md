@@ -52,20 +52,6 @@ This project is an introduction to Docker. You will find here some docs concerni
 > docker plugin              # Manage plugins
 > docker system              # Manage Docker
 
-
-/// More Commands ///
-> docker cp                  # Copy files/folders between a container and the local filesystem
-> docker exec                # Run a command in a running container
-> docker history             # Show the history of an image
-> docker kill                # Kill one or more running containers
-> docker port                # List port mappings or a specific mapping for the container
-> docker rename              # Rename a container
-> docker restart             # Restart one or more containers
-> docker search              # Search the Docker Hub for images
-> docker start               # Start one or more stopped containers
-> docker stats               # Display a live stream of container(s) resource usage statistics
-> docker stop                # Stop one or more running containers
-
 ```
 And [more](https://docs.docker.com/engine/reference/commandline/docker/) ... 
 
@@ -122,6 +108,8 @@ And [more](https://docs.docker.com/engine/reference/commandline/docker/) ...
 - CMD allows you to perform an action without the need for additional parameters
 - ENTRYPOINT is unchangeable and performs the same action throughout container activation. In this case, it acts as an executable file.
 
+---
+
 ## Docker-compose
 - Allows you to start multiple containers at the same time
 - **docker-compose.yml**: required file that will serve as a guide to run the containers correctly
@@ -130,6 +118,128 @@ And [more](https://docs.docker.com/engine/reference/commandline/docker/) ...
 *Example of docker-compose.yml file*
 
 ![docker-compose](/docs/exemple_docker_compose.png)
+
+We'll see some object inside Service Element
+
+### build
+- Specifies the build configuration for creating container image from source
+
+### command
+- Overrides the default command declared by the container images 
+- Can also be a list, similar to Dockerfile
+~~~yml
+command: bundle exec thin -p 3000
+
+command: [ "bundle", "exec", "thin", "-p", "3000" ]
+~~~
+
+### depends-on
+- Expresses startup and shutdown dependencies between services
+- Compose implementations MUST create services in dependency order
+- Compose implementations MUST remove services in dependency order
+~~~yml
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: redis
+  db:
+    image: postgres
+~~~
+_Here, `db` and `redis` are created before `web`. Then `web`, is removed before `db` and `redis`_
+
+### environment
+- Defines environment variables set in the container
+- Can use either array or map
+- Boolean should be enclosed in QUOTE
+- Array syntax :
+~~~yml
+environment:
+  - RACK_ENV=development
+  - SHOW=true
+  - USER_INPUT
+~~~
+
+### expose
+- Defines ports that Compose implementation MUST expose from container
+- Ports **must be accessible to linked services and should not be published to the host machine**
+~~~yml
+expose:
+  - "3000"
+  - "8000"
+~~~
+
+### networks
+- Defines the networks that service containers are attached to
+~~~yml
+services:
+  some-service:
+    networks:
+      - some-network
+      - other-network
+~~~
+
+### ports
+- Expose container ports
+- Port mapping MUST NOT be used with `network_mode: host`
+~~~yml
+ports:
+  - "3000"
+  - "3000-3005"
+  - "8000:8000"
+  - "9090-9091:8080-8081"
+  - "49100:22"
+~~~
+
+### restart
+Define the policy that platform will apply on container termination
+- no: The default restart policy. Does not restart a container under any circumstances.
+- always: The policy always restarts the container until its removal.
+- on-failure: The policy restarts a container if the exit code indicates an error.
+- unless-stopped: The policy restarts a container irrespective of the exit code but will stop restarting when the service is stopped or removed.
+~~~yml
+restart: always
+~~~
+
+### volume
+- Defines mount hosts paths or named volumes that MUST be accessible by service containers
+- **If the mount is a host path and only used by a single service, it MAY be declared as part of the service definition instead of the top-level volumes key.**
+- **To reuse a volume across multiple services, a named volume MUST be declared in the top-level volumes key.**
+
+_This example shows a named volume (db-data) being used by the backend service, and a bind mount defined for a single service_
+~~~yml
+services:
+  backend:
+    image: awesome/backend
+    volumes:
+      - type: volume
+        source: db-data
+        target: /data
+        volume:
+          nocopy: true
+      - type: bind
+        source: /var/run/postgres/postgres.sock
+        target: /var/run/postgres/postgres.sock
+
+volumes:
+  db-data:
+~~~
+There is some target : 
+- type: the mount type volume, bind, tmpfs or npipe
+- source: the source of the mount, a path on the host for a bind mount, or the name of a volume defined in the top-level volumes key. Not applicable for a tmpfs mount.
+- target: the path in the container where the volume is mounted
+- read_only: flag to set the volume as read-only
+- create_host_path: create a directory at the source path on host if there is nothing present. Do nothing if there is something present at the path. This is automatically implied by short syntax for backward compatibility with docker-compose legacy.
+- volume: configure additional volume options
+- nocopy: flag to disable copying of data from a container when a volume is created
+- size: the size for the tmpfs mount in bytes (either numeric or as bytes unit)
+
+### EVERYTHING IS [HERE](https://docs.docker.com/compose/compose-file/)
+
+---
 
 ## Virtualization / Containers
 - Share the same operating system kernel and isolate application processes from the rest of the system
@@ -162,6 +272,7 @@ And [more](https://docs.docker.com/engine/reference/commandline/docker/) ...
 # Sources
 - [Docker docs](https://docs.docker.com)
 - [Docker Compose](https://docs.docker.com/compose/compose-file/)
+- [Docker COmpose Tuto](https://www.youtube.com/watch?v=HG6yIjZapSA)
 - [FR Tuto](https://www.youtube.com/watch?v=fZZwN_e3LYg)
 - [Another tuto](https://www.youtube.com/watch?v=sn6PlRf-UHk&t=1387s)
 - [Docker network](https://devopssec.fr/article/fonctionnement-manipulation-reseau-docker#:~:text=Ce%20type%20de%20réseau%20permet,IP%20que%20votre%20machine%20hôte.)
