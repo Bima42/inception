@@ -1,1 +1,18 @@
-# FILE DOCKER-COMPOSE
+version: "3.3"
+
+services:
+    nginx:
+        build: ./requirements/nginx
+        ports:
+            - 9000:9000
+        environment:
+            - MY_USER=bima
+    wordpress:
+        build: ./requirements/wordpress
+        ports:
+            - 9000:9000
+            - 3006:3006
+    mariadb:
+        build: ./requirements/mariadb
+        ports:
+            - 3006:3006
