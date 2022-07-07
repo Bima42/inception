@@ -161,6 +161,7 @@ And [more](https://docs.docker.com/engine/reference/commandline/docker/) ...
 
 # Sources
 - [Docker docs](https://docs.docker.com)
+- [Docker Compose](https://docs.docker.com/compose/compose-file/)
 - [FR Tuto](https://www.youtube.com/watch?v=fZZwN_e3LYg)
 - [Another tuto](https://www.youtube.com/watch?v=sn6PlRf-UHk&t=1387s)
 - [Docker network](https://devopssec.fr/article/fonctionnement-manipulation-reseau-docker#:~:text=Ce%20type%20de%20réseau%20permet,IP%20que%20votre%20machine%20hôte.)
