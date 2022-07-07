@@ -26,7 +26,7 @@ This project is an introduction to Docker. You will find here some docs concerni
 > docker images              # List existing images
 > docker rmi [image]         # Delete image
 > docker inspect [container] # Show container config
-> docker build -t [image] .  # Build image from Dockerfile
+> docker build -t [image] .  # Build image from Dockerfile with name [image]
 > docker history [image]     # View layers of image
 > docker inspect             # Return low-level information on Docker objects
 > docker run                 # Run a command in a new container
