@@ -4,4 +4,4 @@ WORKDIR ./mariadb
 
 RUN apt-get update -y && echo mama
 
-EXPOSE 3006
+EXPOSE 3306

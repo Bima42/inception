@@ -1,9 +1,9 @@
-FROM nginx:latest
+FROM ubuntu
 
-WORKDIR ./nginx
+RUN apt-get -y update && apt-get -y install nginx
 
-COPY ./nginx_conf.txt nginx_conf.txt
+COPY conf/nginx-conf /etc/nginx/sites-available/nginx-conf
 
-RUN apt-get update -y && echo mama
+EXPOSE 80
 
-EXPOSE 9000
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]

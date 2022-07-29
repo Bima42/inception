@@ -1,18 +1,33 @@
 version: "3.3"
 
+networks:
+        inception: {}
+
 services:
     nginx:
+        container_name: nginx
         build: ./requirements/nginx
+        networks:
+            - inception
         ports:
-            - 9000:9000
-        environment:
-            - MY_USER=bima
+            - "443:443"
+        depends_on:
+            - wordpress
+            - mariadb
+        restart: always
+
     wordpress:
+        container_name: wordpress
         build: ./requirements/wordpress
-        ports:
-            - 9000:9000
-            - 3006:3006
+        networks:
+            - inception
+        depends_on:
+            - mariadb
+        restart: always
+
     mariadb:
+        container_name: mariadb
         build: ./requirements/mariadb
-        ports:
-            - 3006:3006
+        networks:
+            - inception
+        restart: always
