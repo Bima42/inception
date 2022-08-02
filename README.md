@@ -9,14 +9,6 @@ This project is an introduction to Docker. You will find here some docs concerni
 
 ## Docker Commands
 ```
-/// Basic Commands ///
-> docker login               # Connect to registry
-> docker logout              # Disonnect
-> docker search [name]       # Search image
-> docker pull [image]        # Pull image
-> docker push [image]        # Push image to registry
-
-
 /// Main Commands ///
 > docker build	             # Build an image from a Dockerfile
 > docker create	             # Create a new container
@@ -27,10 +19,8 @@ This project is an introduction to Docker. You will find here some docs concerni
 > docker rmi [image]         # Delete image
 > docker inspect [container] # Show container config
 > docker build -t [image] .  # Build image from Dockerfile with name [image]
-> docker history [image]     # View layers of image
 > docker inspect             # Return low-level information on Docker objects
 > docker run                 # Run a command in a new container
-> docker info                # Display system-wide information
 > docker system prune        # Clear system
 
 
@@ -46,11 +36,6 @@ This project is an introduction to Docker. You will find here some docs concerni
 > docker container           # Manage containers
 > docker volume              # Manage volumes
 > docker image               # Manage images
-> docker service             # Manage services
-> docker stack               # Manage Docker stacks
-> docker network             # Manage networks
-> docker plugin              # Manage plugins
-> docker system              # Manage Docker
 
 ```
 And [more](https://docs.docker.com/engine/reference/commandline/docker/) ... 
@@ -276,3 +261,6 @@ There is some target :
 - [FR Tuto](https://www.youtube.com/watch?v=fZZwN_e3LYg)
 - [Another tuto](https://www.youtube.com/watch?v=sn6PlRf-UHk&t=1387s)
 - [Docker network](https://devopssec.fr/article/fonctionnement-manipulation-reseau-docker#:~:text=Ce%20type%20de%20réseau%20permet,IP%20que%20votre%20machine%20hôte.)
+- [MySQL Docs](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html#option_mysql_execute)
+- [Creating CSR One command](https://www.digicert.com/kb/ssl-support/openssl-quick-reference-guide.htm)
+- [Doc OpenSSL req](https://www.openssl.org/docs/man1.0.2/man1/openssl-req.html)
