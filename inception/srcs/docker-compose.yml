@@ -1,9 +1,12 @@
 version: "3.3"
 
 networks:
-        inception: {}
+    inception:
+        driver: bridge
 
 services:
+
+#---------------------NGINX------------------------#
     nginx:
         container_name: nginx
         build: ./requirements/nginx
@@ -16,6 +19,8 @@ services:
             - mariadb
         restart: always
 
+
+#-------------------WORDPRESS---------------------#
     wordpress:
         container_name: wordpress
         build: ./requirements/wordpress
@@ -24,10 +29,29 @@ services:
         depends_on:
             - mariadb
         restart: always
+        volumes:
+            - wordpress_data:/var/www/html/wordpress
 
+
+#-------------------MARIADB---------------------#
     mariadb:
         container_name: mariadb
         build: ./requirements/mariadb
         networks:
             - inception
         restart: always
+        volumes:
+            - mariadb_data:/var/lib/mysql
+
+volumes:
+    mariadb_data:
+        driver_opts:
+            type: "none"
+            o: "bind"
+            device: "/home/tpauvret/data/mariadb"
+
+    wordpress_data:
+        driver_opts:
+            type: "none"
+            o: "bind"
+            device: "/home/tpauvret/data/wordpress"
