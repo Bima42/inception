@@ -1,8 +1,7 @@
-version: "3.3"
+version: "3.5"
 
 networks:
-    inception:
-        driver: bridge
+    inception: {}
 
 services:
 
@@ -10,6 +9,7 @@ services:
     nginx:
         container_name: nginx
         build: ./requirements/nginx
+        image: nginx
         networks:
             - inception
         ports:
@@ -23,7 +23,11 @@ services:
 #-------------------WORDPRESS---------------------#
     wordpress:
         container_name: wordpress
-        build: ./requirements/wordpress
+        image: wordpress
+        build: 
+            context: ./requirements/wordpress
+        env_file:
+            - .env
         networks:
             - inception
         depends_on:
@@ -36,22 +40,31 @@ services:
 #-------------------MARIADB---------------------#
     mariadb:
         container_name: mariadb
-        build: ./requirements/mariadb
+        image: mariadb
+        build: 
+            context: ./requirements/mariadb
+            args:
+                - DB_NAME=${DB_NAME}
+                - DB_USER=${DB_USER}
+                - DB_PASSWORD=${DB_PASSWORD}
+                - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
         networks:
             - inception
-        restart: always
         volumes:
             - mariadb_data:/var/lib/mysql
+        restart: always
 
 volumes:
     mariadb_data:
         driver_opts:
             type: "none"
             o: "bind"
-            device: "/home/tpauvret/data/mariadb"
+            device: "/home/bima/data/mariadb"
 
     wordpress_data:
         driver_opts:
             type: "none"
             o: "bind"
-            device: "/home/tpauvret/data/wordpress"
+            device: "/home/bima/data/wordpress"
+
+# CHANGE BIMA TO TPAUVRET !

@@ -7,10 +7,13 @@ done
 
 echo >&2 "mariadb is up - start next wordpress bootstrap"
 
-if ! wp core is-installed; then
-  echo >&2 "wordpress is unavailable - start wordpress install"
-  wp core download --locale=en_EN --version=5.9.1
-  wp config create \
+# if ! wp core is-installed; then
+#  echo >&2 "wordpress is unavailable - start wordpress install"
+#  wp core download --locale=en_EN --version=5.9.1
+  cd/var/www/wordpress
+
+#  wp config create  
+  wp core config \
     --dbname=$DB_NAME \
     --dbuser=$DB_USER \
     --dbpass=$DB_PASSWORD \
@@ -18,14 +21,15 @@ if ! wp core is-installed; then
     --locale=en_EN
 
   wp core install \
-    --url="$DOMAIN_NAME" \
+    --url=$WP_URL \
     --title="$WP_TITLE" \
     --admin_user="$WP_ADMIN_USER" \
     --admin_email="$WP_ADMIN_MAIL" \
     --admin_password="$WP_ADMIN_PASSWORD"
 
   wp user create --porcelain \
-    "$WP_USER" "$WP_USER_EMAIL" --role=author --user_pass="$WP_USER_PASSWORD"
+    "$WP_USER" "$WP_USER_EMAIL" --role=author --user_pass="$WP_USER_PASSWORD" --allow-root
+  cd -
 
   php-fpm7.3 -F
-fi
+# fi
