@@ -11,7 +11,6 @@ This project is an introduction to Docker. You will find here some docs concerni
 ```
 /// Main Commands ///
 > docker build	             # Build an image from a Dockerfile
-> docker create	             # Create a new container
 > docker ps                  # View active containers
 > docker ps -a               # View all containers
 > docker rm [container]      # Delete inactive container
@@ -21,18 +20,16 @@ This project is an introduction to Docker. You will find here some docs concerni
 > docker build -t [image] .  # Build image from Dockerfile with name [image]
 > docker inspect             # Return low-level information on Docker objects
 > docker run                 # Run a command in a new container
-> docker system prune        # Clear system
+> docker system prune -a     # Clear system
 
 
 /// DOCKER COMPOSE ///
 > docker-compose up          # Launch group of containers
 > docker-compose up -d       # Launch group of containers in background
 > docker-compose down        # Stop processes
-> docker-compose exec        # Execute command inside service
 
 
 /// Manage /// 
-> docker config              # Manage Docker configs
 > docker container           # Manage containers
 > docker volume              # Manage volumes
 > docker image               # Manage images
@@ -67,10 +64,6 @@ And [more](https://docs.docker.com/engine/reference/commandline/docker/) ...
 - ENV can be accessed even when the container created by the image will be launched
 - Environment variable = variables necessary for the very execution of the container and the application
 - Database credentials are often declared in environment variables.
-
-#### WORKDIR
-- Build commands (RUN, ADD and COPY) will therefore be assigned to the path mentioned in WORKDIR.
-- Same for execution commands (EXPOSE, CMD and ENTRYPOINT)
 
 #### USER
 - Determine the user or user group that can interact with the image that will be created.
@@ -217,10 +210,6 @@ There is some target :
 - source: the source of the mount, a path on the host for a bind mount, or the name of a volume defined in the top-level volumes key. Not applicable for a tmpfs mount.
 - target: the path in the container where the volume is mounted
 - read_only: flag to set the volume as read-only
-- create_host_path: create a directory at the source path on host if there is nothing present. Do nothing if there is something present at the path. This is automatically implied by short syntax for backward compatibility with docker-compose legacy.
-- volume: configure additional volume options
-- nocopy: flag to disable copying of data from a container when a volume is created
-- size: the size for the tmpfs mount in bytes (either numeric or as bytes unit)
 
 ### EVERYTHING IS [HERE](https://docs.docker.com/compose/compose-file/)
 
