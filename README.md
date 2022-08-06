@@ -214,6 +214,25 @@ There is some target :
 ### EVERYTHING IS [HERE](https://docs.docker.com/compose/compose-file/)
 
 ---
+# SERVICES
+
+I'll let you find it by yourselves, i'll only give you some docs to check
+
+## MariaDB
+- [Definition](https://en.wikipedia.org/wiki/MariaDB)
+- [RDBMS](https://fr.wikipedia.org/wiki/Système_de_gestion_de_base_de_données)
+- [SQL Commands](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html#option_mysql_execute)
+
+## Wordpress
+- [Docs](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lamp-on-debian-10)
+- [Other Docs](https://www.inmotionhosting.com/support/edu/wordpress/install-wordpress-debian-10/)
+
+## Nginx
+- [Definition](https://kinsta.com/knowledgebase/what-is-nginx/#:~:text=NGINX%20or%20Apache-,How%20Does%20Nginx%20Work%3F,can%20control%20multiple%20worker%20processes.)
+- [Create Container](https://www.baeldung.com/linux/nginx-docker-container)
+- [OpenSSL req](https://www.openssl.org/docs/man1.0.2/man1/openssl-req.html)
+- [Certificates](https://www.digicert.com/kb/ssl-support/openssl-quick-reference-guide.htm)
+---
 
 ## Virtualization / Containers
 - Share the same operating system kernel and isolate application processes from the rest of the system
