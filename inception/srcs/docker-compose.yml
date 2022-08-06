@@ -17,7 +17,7 @@ services:
         depends_on:
             - wordpress
             - mariadb
-        restart: always
+        restart: on-failure
 
 
 #-------------------WORDPRESS---------------------#
@@ -32,7 +32,7 @@ services:
             - inception
         depends_on:
             - mariadb
-        restart: always
+        restart: on-failure
         volumes:
             - wordpress_data:/var/www/html/wordpress
 
@@ -52,7 +52,7 @@ services:
             - inception
         volumes:
             - mariadb_data:/var/lib/mysql
-        restart: always
+        restart: on-failure
 
 volumes:
     mariadb_data:

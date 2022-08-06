@@ -21,3 +21,10 @@ RUN bash ./docker-entrypoint.sh
 RUN rm docker-entrypoint.sh
 
 CMD ["mysqld_safe"] 
+
+# Connect to DB :
+
+# sudo docker exec -it mariadb mariadb --user tpauvret -p root
+# SHOW DATABASES;
+# USE wordpress;
+# SHOW TABLES
