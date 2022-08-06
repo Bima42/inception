@@ -62,7 +62,9 @@ clean:
 fclean: clean
 	@echo "$(GREEN)██████████████████████████ REMOVE VOLUMES ███████████████████████████$(RESET)"
 	@rm -rf /home/tpauvret/data/mariadb/*
+	echo "Successfully removed MariaDB volume in /home/tpauvret/data/mariadb"
 	@rm -rf /home/tpauvretdata/wordpress/*
+	echo "Successfully removed Wordpress volume in /home/tpauvret/data/wordpress"
 	@echo "$(GREEN)████████████████████████ EVERYTHING IS CLEAR ████████████████████████$(RESET)"
 
 re:	fclean all
