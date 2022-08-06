@@ -43,11 +43,6 @@ services:
         image: mariadb
         build: 
             context: ./requirements/mariadb
-            args:
-                - DB_NAME=${DB_NAME}
-                - DB_USER=${DB_USER}
-                - DB_PASSWORD=${DB_PASSWORD}
-                - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
         networks:
             - inception
         volumes:
@@ -59,12 +54,10 @@ volumes:
         driver_opts:
             type: "none"
             o: "bind"
-            device: "/home/bima/data/mariadb"
+            device: "/home/tpauvret/data/mariadb"
 
     wordpress_data:
         driver_opts:
             type: "none"
             o: "bind"
-            device: "/home/bima/data/wordpress"
-
-# CHANGE BIMA TO TPAUVRET !
+            device: "/home/tpauvret/data/wordpress"
