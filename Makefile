@@ -1,8 +1,5 @@
 # Colors variables
-RED = \033[1;31m
 GREEN = \033[1;32m
-YELLOW = \033[1;33m
-BLUE = \033[1;34m
 RESET = \033[0m
 
 NAME = inception
@@ -11,7 +8,7 @@ FILE = srcs/docker-compose.yml
 
 COMPOSE = docker-compose -f ${FILE} -p ${NAME}
 
-all:	build up
+all:	rmvolumes volumes build up
 
 build:
 	@echo "$(GREEN)██████████████████████████ BUILDING.. ███████████████████████████$(RESET)"
@@ -21,7 +18,7 @@ up:
 	@echo "$(GREEN)██████████████████████████ STARTING.. ███████████████████████████$(RESET)"
 	${COMPOSE} up -d
 
-launch:
+launch: rmvolumes volumes
 	@echo "$(GREEN)██████████████████████████ BUILD & START ███████████████████████████$(RESET)"
 	${COMPOSE} build --no-cache && ${COMPOSE} up -d
 
@@ -52,21 +49,26 @@ container:
 	@echo "$(GREEN)████████████████████████████ CONTAINERS ████████████████████████████$(RESET)"
 	docker ps
 
-clean:
-	@echo "$(GREEN)████████████████████████ CLEANING CONTAINERS AND IMAGES █████████████████████████$(RESET)"
-	${COMPOSE} down --rmi all -v
-	docker system prune -a
-
-#	To remove all images which are not used by existing containers, use the -a flag
-
-fclean: clean
-	@echo "$(GREEN)██████████████████████████ REMOVE VOLUMES ███████████████████████████$(RESET)"
+rmvolumes: 
+	@echo "$(GREEN)█████████████████████ REMOVING VOLUMES ██████████████████████$(RESET)"
 	@rm -rf /home/tpauvret/data/mariadb/*
 	echo "Successfully removed MariaDB volume in /home/tpauvret/data/mariadb"
 	@rm -rf /home/tpauvretdata/wordpress/*
 	echo "Successfully removed Wordpress volume in /home/tpauvret/data/wordpress"
+
+volumes:
+	@echo "$(GREEN)█████████████████████ CREATING VOLUMES ██████████████████████$(RESET)"
+	mkdir -p $(HOME)/data/db-data
+	mkdir -p $(HOME)/data/www-data
+	mkdir -p $(HOME)/data/backup-data
+
+clean:	rmvolumes
+	@echo "$(GREEN)████████████████████████ CLEANING CONTAINERS AND IMAGES █████████████████████████$(RESET)"
+	${COMPOSE} down --rmi all -v
+	docker system prune -a
+#	To remove all images which are not used by existing containers, use the -a flag
 	@echo "$(GREEN)████████████████████████ EVERYTHING IS CLEAR ████████████████████████$(RESET)"
 
-re:	fclean all
+re:	clean all
 
-.PHONY:	all clean fclean down launch up build nginx mariadb wordpress images container
+.PHONY:	all build up launch clean nginx mariadb wordpress images container

@@ -47,19 +47,19 @@ echo -e
 
 if [ -d "/home/tpauvret/data" ]; then \
 	echo "Data directory already exists"; else \
-	mkdir /home/tpauvret/data; \
+	mkdir -p /home/tpauvret/data; \
 	echo "Data directory created successfully"; \
 fi
 
 if [ -d "/home/tpauvret/data/wordpress" ]; then \
 	echo "Wordpress volume already exists"; else \
-	mkdir /home/tpauvret/data/wordpress; \
+	mkdir -p /home/tpauvret/data/wordpress; \
 	echo "Wordpress directory created successfully"; \
 fi
 
 if [ -d "/home/tpauvret/data/mariadb" ]; then \
 	echo "MariaDB volume already exists"; else \
-	mkdir /home/tpauvret/data/mariadb; \
+	mkdir -p /home/tpauvret/data/mariadb; \
 	echo "Mariadb directory created successfully"; \
 fi
 
