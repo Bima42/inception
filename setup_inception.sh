@@ -14,14 +14,16 @@ echo -e
 echo "${GREEN}██████████████████████████ Install tools ███████████████████████████${RESET}"
 echo -e
 
-sudo apt-get install openssh-server make curl ca-certificates git vim curl lsb-release -y
+sudo apt-get install openssh-server make curl ca-certificates apt-transport-https software-properties-common git vim curl lsb-release -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu `lsb_release -cs` test"
 
 echo -e
 echo "${GREEN}██████████████████████████ Install docker ███████████████████████████${RESET}"
 echo -e
 
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli -y
+sudo apt update
+sudo apt install docker-ce
 sudo apt-get update
 
 echo -e
@@ -35,25 +37,25 @@ echo -e
 echo "${GREEN}██████████████████████████ Create volumes ███████████████████████████${RESET}"
 echo -e
 
-if [ -d "/home/$USER/data" ]; then \
+if [ -d "/home/tpauvret/data" ]; then \
 	echo "Data directory already exists"; else \
-	mkdir /home/$USER/data; \
+	mkdir /home/tpauvret/data; \
 	echo "Data directory created successfully"; \
 fi
 
-if [ -d "/home/$USER/data/wordpress" ]; then \
+if [ -d "/home/tpauvret/data/wordpress" ]; then \
 	echo "Wordpress volume already exists"; else \
-	mkdir /home/$USER/data/wordpress; \
+	mkdir /home/tpauvret/data/wordpress; \
 	echo "Wordpress directory created successfully"; \
 fi
 
-if [ -d "/home/$USER/data/mariadb" ]; then \
+if [ -d "/home/tpauvret/data/mariadb" ]; then \
 	echo "MariaDB volume already exists"; else \
-	mkdir /home/$USER/data/mariadb; \
+	mkdir /home/tpauvret/data/mariadb; \
 	echo "Mariadb directory created successfully"; \
 fi
 
-sudo sed-i "s/localhost/tpauvret.42.fr/g" /etc/hosts
+sudo sed -i "s/localhost/tpauvret.42.fr/g" /etc/hosts
 
 echo -e
 echo "${GREEN}██████████████████████████ Setup done ███████████████████████████${RESET}"
