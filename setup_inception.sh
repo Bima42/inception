@@ -14,16 +14,24 @@ echo -e
 echo "${GREEN}██████████████████████████ Install tools ███████████████████████████${RESET}"
 echo -e
 
-sudo apt-get install openssh-server make curl ca-certificates apt-transport-https software-properties-common git vim curl lsb-release -y
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu `lsb_release -cs` test"
+sudo apt-get install openssh-server make curl ca-certificates apt-transport-https software-properties-common gnupg git vim curl lsb-release -y
+
+# Add Docker’s official GPG key:
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+# Set up the repository
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 
 echo -e
 echo "${GREEN}██████████████████████████ Install docker ███████████████████████████${RESET}"
 echo -e
 
 sudo apt update
-sudo apt install docker-ce
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo apt-get update
 
 echo -e
