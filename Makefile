@@ -8,7 +8,7 @@ FILE = srcs/docker-compose.yml
 
 COMPOSE = docker-compose -f ${FILE} -p ${NAME}
 
-all:	rmvolumes volumes build up
+all:	volumes build up
 
 build:
 	@echo "$(GREEN)██████████████████████████ BUILDING.. ███████████████████████████$(RESET)"
@@ -58,9 +58,8 @@ rmvolumes:
 
 volumes:
 	@echo "$(GREEN)█████████████████████ CREATING VOLUMES ██████████████████████$(RESET)"
-	mkdir -p $(HOME)/data/db-data
-	mkdir -p $(HOME)/data/www-data
-	mkdir -p $(HOME)/data/backup-data
+	mkdir -p /home/tpauvret/data/mariadb
+	mkdir -p /home/tpauvret/data/wordpress
 
 clean:	rmvolumes
 	@echo "$(GREEN)████████████████████████ CLEANING CONTAINERS AND IMAGES █████████████████████████$(RESET)"

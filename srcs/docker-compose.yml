@@ -47,6 +47,8 @@ services:
             - inception
         volumes:
             - mariadb_data:/var/lib/mysql
+        env_file:
+            - .env
         restart: on-failure
 
 volumes:

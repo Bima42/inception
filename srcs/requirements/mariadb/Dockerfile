@@ -16,11 +16,13 @@ COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d
 
 # Here we run script
 COPY tools/docker-entrypoint.sh /
-RUN bash ./docker-entrypoint.sh
+RUN chmod +x docker-entrypoint.sh
 
-RUN rm docker-entrypoint.sh
+#RUN bash ./docker-entrypoint.sh
 
-CMD ["mysqld_safe"] 
+#RUN rm docker-entrypoint.sh
+
+CMD ["./docker-entrypoint.sh"] 
 
 # Connect to DB :
 
