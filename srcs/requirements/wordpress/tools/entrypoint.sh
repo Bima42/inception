@@ -1,28 +1,22 @@
 #!/bin/bash
 
-WP="wp --path=/var/www/wordpress"
-
 cd /var/www/wordpress
 
-$WP core download --allow-root
+wp core download --allow-root
 
-#wp core config \
-#    --dbhost=$DB_HOST \
-#    --dbname=$DB_NAME \
-#    --dbuser=$DB_USER \
-#    --dbpass=$DB_PASSWORD \
-#    --dbhost=mariadb \
-#    --locale=en_EN
+wp core install \
+    --allow-root \
+    --url=${WP_URL} \
+    --title=${WP_TITLE} \
+    --admin_user=${WP_ADMIN_USER} \
+    --admin_email=${WP_ADMIN_MAIL} \
+    --admin_password=${WP_ADMIN_PASSWORD}
 
-$WP core install \
-    --url=$WP_URL \
-    --title="$WP_TITLE" \
-    --admin_user="$WP_ADMIN_USER" \
-    --admin_email="$WP_ADMIN_MAIL" \
-    --admin_password="$WP_ADMIN_PASSWORD"
+wp user create ${WP_USER} ${WP_USER_EMAIL} --role=author --user_pass=${WP_USER_PASSWORD} --allow-root
 
-$WP user create "$WP_USER" "$WP_USER_EMAIL" --role=author --user_pass="$WP_USER_PASSWORD" --allow-root
+mkdir -p /var/www/wordpress/mysite
+mv /var/www/index.html /var/www/wordpress/index.html
 
 cd -
 
-php-fpm7.3 -F
+/usr/sbin/php-fpm7.3 -F

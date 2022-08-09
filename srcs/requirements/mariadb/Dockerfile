@@ -15,14 +15,13 @@ EXPOSE 3306
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d
 
 # Here we run script
-COPY tools/docker-entrypoint.sh /
-RUN chmod +x docker-entrypoint.sh
+COPY tools/create_user.sql /
+RUN chmod 777 create_user.sql
 
-#RUN bash ./docker-entrypoint.sh
+RUN service mysql start && mysql < create_user.sql && rm -f create_user.sql
 
-#RUN rm docker-entrypoint.sh
+CMD ["/usr/bin/mysqld_safe"] 
 
-CMD ["./docker-entrypoint.sh"] 
 
 # Connect to DB :
 

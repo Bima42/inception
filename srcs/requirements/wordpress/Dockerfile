@@ -19,13 +19,13 @@ RUN cd /var/www && tar -xvf latest.tar.gz && rm -rf latest.tar.gz && \
 	mv wp-cli.phar /usr/local/bin/wp && \
 	mkdir /run/php
 
-COPY wp-config.php /var/www/wp-config.php
 COPY wp-config.php /var/www/wordpress/wp-config.php
 
 RUN chmod 644 /var/www/wordpress/wp-config.php
-RUN chmod 644 /var/www/wp-config.php
 
 COPY ./tools/entrypoint.sh /var/www/wordpress/entrypoint.sh
 RUN chmod +x /var/www/wordpress/entrypoint.sh
+
+COPY conf/index.html /var/www/
 
 CMD ["bash", "/var/www/wordpress/entrypoint.sh"]
