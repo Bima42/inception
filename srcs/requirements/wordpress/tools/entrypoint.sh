@@ -12,10 +12,7 @@ wp core install \
     --admin_email=${WP_ADMIN_MAIL} \
     --admin_password=${WP_ADMIN_PASSWORD}
 
-wp user create ${WP_USER} ${WP_USER_EMAIL} --role=author --user_pass=${WP_USER_PASSWORD} --allow-root
-
-mkdir -p /var/www/wordpress/mysite
-mv /var/www/index.html /var/www/wordpress/index.html
+wp user create ${WP_USER} ${WP_USER_MAIL} --role=author --user_pass=${WP_USER_PASSWORD} --allow-root
 
 cd -
 

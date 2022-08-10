@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y \
 	php7.3-fpm \
 	php7.3-mysql \
 	curl \
-	less
+	less \
+	net-tools
 
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
 
@@ -24,7 +25,7 @@ COPY wp-config.php /var/www/wordpress/wp-config.php
 RUN chmod 644 /var/www/wordpress/wp-config.php
 
 COPY ./tools/entrypoint.sh /var/www/wordpress/entrypoint.sh
-RUN chmod +x /var/www/wordpress/entrypoint.sh
+RUN chmod 777 /var/www/wordpress/entrypoint.sh
 
 COPY conf/index.html /var/www/
 
