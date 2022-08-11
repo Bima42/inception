@@ -2,6 +2,8 @@
 
 cd /var/www/wordpress
 
+chmod 644 /var/www/wordpress/wp-config.php
+
 wp core download --allow-root
 
 wp core install \
@@ -14,6 +16,6 @@ wp core install \
 
 wp user create ${WP_USER} ${WP_USER_MAIL} --role=author --user_pass=${WP_USER_PASSWORD} --allow-root
 
-cd -
+chmod -R 755 /var/www/wordpress/wp-content
 
 /usr/sbin/php-fpm7.3 -F

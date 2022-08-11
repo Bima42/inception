@@ -13,11 +13,14 @@ services:
         networks:
             - inception
         ports:
-            - "443:443"
+            - 443:443
         depends_on:
             - wordpress
             - mariadb
         restart: always
+        volumes:
+            - nginx_data:/var/log/nginx
+            - wordpress_data:/var/www/wordpress
 
 
 #-------------------WORDPRESS---------------------#
@@ -63,3 +66,10 @@ volumes:
             type: "none"
             o: "bind"
             device: "/home/tpauvret/data/wordpress"
+
+    nginx_data:
+        driver_opts:
+            type: "none"
+            o: "bind"
+            device: "/home/tpauvret/data/nginx"
+
