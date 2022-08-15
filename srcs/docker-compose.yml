@@ -54,6 +54,7 @@ services:
             - .env
         restart: always
 
+#------------------VOLUMES---------------------#
 volumes:
     mariadb_data:
         driver_opts:
