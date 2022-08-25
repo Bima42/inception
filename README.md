@@ -62,13 +62,12 @@ And [more](https://docs.docker.com/engine/reference/commandline/docker/) ...
 | FROM             | Image source                                 |
 | ARG              | Variables used as parameters for building    |
 | ENV              | Environment variables                        |
-| WORKDIR          | Change current path                          |
 | USER             | User ID                                      |
 | ADD              | Add file to image                            |
 | COPY             | Add file to image                            |
 | RUN              | Commands used to build image                 |
 | EXPOSE           | Ports listened by container                  |
-| CM/ENTRYPOINT    | Run command at container start               |
+| CMD/ENTRYPOINT   | Run command at container start               |
 
 ![dockerfile](/docs/exemple_dockerfile.png)
 
