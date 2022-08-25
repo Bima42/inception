@@ -1,5 +1,7 @@
 # Inception
-This project is an introduction to Docker. You will find here some docs concerning Docker.
+This project is an introduction to Docker. 
+The goal is to build a local website using MariaDB as database, Worpress and NGINX. 
+You will find here some docs concerning Docker, MariaDB, Wordpress, NGINX and more.
 
 # Installation
 - Once your VM is correctly installed, run the script
