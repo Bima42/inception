@@ -12,7 +12,7 @@ You will find here some docs concerning Docker, MariaDB, Wordpress, NGINX and mo
 
 - ``` make```
 
-- Go to https://tpauvret.42.fr
+- Go to username.42.fr (if you don't make any changes, use tpauvret as username)
 
 # Docker
 - It's an open source containerization platform.
