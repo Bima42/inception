@@ -1,6 +1,15 @@
 # Inception
 This project is an introduction to Docker. You will find here some docs concerning Docker.
 
+# Installation
+- Once your VM is correctly installed, run the script
+
+- ``` bash ./setup_inception.sh```
+
+- Launch inception project by creating volumes and start container using docker-compose
+
+- ``` make```
+
 # Docker
 - It's an open source containerization platform.
 - Enables developers to package applications into containers—standardized executable components combining application source code with the operating system (OS) libraries and dependencies required to run that code in any environment.
