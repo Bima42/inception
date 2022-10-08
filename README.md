@@ -8,11 +8,13 @@ You will find here some docs concerning Docker, MariaDB, Wordpress, NGINX and mo
 
 - ``` bash ./setup_inception.sh```
 
-- Launch inception project by creating volumes and start container using docker-compose
-
 - ``` make```
 
 - Go to username.42.fr (if you don't make any changes, use tpauvret as username)
+
+# Resume
+
+![resume](/docs/Inception.png)
 
 # Docker
 - It's an open source containerization platform.
@@ -107,9 +109,76 @@ And [more](https://docs.docker.com/engine/reference/commandline/docker/) ...
 
 *Example of docker-compose.yml file*
 
-![docker-compose](/docs/exemple_docker_compose.png)
+~~~yml
+version: "3.5"
 
-We'll see some object inside Service Element
+networks:
+    inception: {}
+
+services:
+
+#---------------------NGINX------------------------#
+    nginx:
+        container_name: nginx
+        build: ./requirements/nginx
+        image: nginx
+        networks:
+            - inception
+        ports:
+            - 443:443
+        depends_on:
+            - wordpress
+            - mariadb
+        restart: always
+        volumes:
+            - wordpress_data:/var/www/wordpress
+
+
+#-------------------WORDPRESS---------------------#
+    wordpress:
+        container_name: wordpress
+        image: wordpress
+        build: 
+            context: ./requirements/wordpress
+        env_file:
+            - .env
+        networks:
+            - inception
+        depends_on:
+            - mariadb
+        restart: always
+        volumes:
+            - wordpress_data:/var/www/wordpress
+
+
+#-------------------MARIADB---------------------#
+    mariadb:
+        container_name: mariadb
+        image: mariadb
+        build: 
+            context: ./requirements/mariadb
+        networks:
+            - inception
+        volumes:
+            - mariadb_data:/var/lib/mysql
+        env_file:
+            - .env
+        restart: always
+
+#------------------VOLUMES---------------------#
+volumes:
+    mariadb_data:
+        driver_opts:
+            type: "none"
+            o: "bind"
+            device: "/home/tpauvret/data/mariadb"
+
+    wordpress_data:
+        driver_opts:
+            type: "none"
+            o: "bind"
+            device: "/home/tpauvret/data/wordpress"
+~~~
 
 ### build
 - Specifies the build configuration for creating container image from source
@@ -117,6 +186,7 @@ We'll see some object inside Service Element
 ### command
 - Overrides the default command declared by the container images 
 - Can also be a list, similar to Dockerfile
+
 ~~~yml
 command: bundle exec thin -p 3000
 
@@ -127,6 +197,7 @@ command: [ "bundle", "exec", "thin", "-p", "3000" ]
 - Expresses startup and shutdown dependencies between services
 - Compose implementations MUST create services in dependency order
 - Compose implementations MUST remove services in dependency order
+
 ~~~yml
 services:
   web:
@@ -146,6 +217,7 @@ _Here, `db` and `redis` are created before `web`. Then `web`, is removed before 
 - Can use either array or map
 - Boolean should be enclosed in QUOTE
 - Array syntax :
+
 ~~~yml
 environment:
   - RACK_ENV=development
@@ -156,6 +228,7 @@ environment:
 ### expose
 - Defines ports that Compose implementation MUST expose from container
 - Ports **must be accessible to linked services and should not be published to the host machine**
+
 ~~~yml
 expose:
   - "3000"
@@ -164,6 +237,7 @@ expose:
 
 ### networks
 - Defines the networks that service containers are attached to
+
 ~~~yml
 services:
   some-service:
@@ -175,6 +249,7 @@ services:
 ### ports
 - Expose container ports
 - Port mapping MUST NOT be used with `network_mode: host`
+
 ~~~yml
 ports:
   - "3000"
@@ -190,6 +265,7 @@ Define the policy that platform will apply on container termination
 - always: The policy always restarts the container until its removal.
 - on-failure: The policy restarts a container if the exit code indicates an error.
 - unless-stopped: The policy restarts a container irrespective of the exit code but will stop restarting when the service is stopped or removed.
+
 ~~~yml
 restart: always
 ~~~
@@ -200,6 +276,7 @@ restart: always
 - **To reuse a volume across multiple services, a named volume MUST be declared in the top-level volumes key.**
 
 _This example shows a named volume (db-data) being used by the backend service, and a bind mount defined for a single service_
+
 ~~~yml
 services:
   backend:
