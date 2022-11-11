@@ -1,16 +1,46 @@
 # Inception
-This project is an introduction to Docker. 
-The goal is to build a local website using MariaDB as database, Worpress and NGINX. 
-You will find here some docs concerning Docker, MariaDB, Wordpress, NGINX and more.
+- [1. Get Started](#get-started)
+- [2. Resume](#resume)
+- [3. Docker](#docker)
+- [4. Docker Commands](#docker-commands)
+- [5. Dockerfile](#dockerfile)
+  - [5.1 Dockerfile Commands](dockerfile-commands)
+    - [5.1.1 ENV](#env)
+    - [5.1.2 USER](#user)
+    - [5.1.3 ADD](#add)
+    - [5.1.4 COPY](#copy)
+    - [5.1.5 EXPOSE](#expose)
+    - [5.1.6 CMD / ENTRYPOINT](#cmd-and-entrypoint)
+- [6. Docker-compose](#docker-compose)
+  - [6.1 Docker-compose commands](#docker-compose-commands)
+    - [6.1.1 build](#build)
+    - [6.1.2 command](#command)
+    - [6.1.3 depends-on](#depends-on)
+    - [6.1.4 environment](#environment)
+    - [6.1.5 expose](#expose)
+    - [6.1.6 networks](#networks)
+    - [6.1.7 restart](#restart)
+    - [6.1.8 volume](#volume)
+- [7. Services](#services)
+  - [7.1 MariaDB](#mariadb)
+  - [7.2 Wordpress](#wordpress)
+  - [7.3 Nginx](#nginx)
+- [8. Sources](#sources)
 
-# Installation
+# Get Started
+- Set up your VM. I used Debian 10 for my project
+
 - Once your VM is correctly installed, run the script
 
-- ``` bash ./setup_inception.sh```
+```
+bash ./setup_inception.sh
+```
 
-- ``` make```
+```
+make
+```
 
-- Go to username.42.fr (if you don't make any changes, use tpauvret as username)
+- Go to username.42.fr (if you don't make any changes, use `tpauvret` as username)
 
 # Resume
 
@@ -22,7 +52,7 @@ You will find here some docs concerning Docker, MariaDB, Wordpress, NGINX and mo
 - Based on LCX (LinuX Containers).
 - Docker was created to address the portability and efficiency issues of virtual machines.
 
-## Docker Commands
+# Docker Commands
 ```
 /// Main Commands ///
 > docker build	             # Build an image from a Dockerfile
@@ -52,13 +82,13 @@ You will find here some docs concerning Docker, MariaDB, Wordpress, NGINX and mo
 ```
 And [more](https://docs.docker.com/engine/reference/commandline/docker/) ... 
 
-## Dockerfile
+# Dockerfile
 - contains the necessary instructions to build a docker image
 - instructions describe the actions the image should perform once it is created
 - docker image is built by running the **docker build** command.
 - by launching a docker build, the **docker daemon** reads each line found in the dockerfile, then performs the requests requested by it
 
-### Dockerfile Commands
+## Dockerfile Commands
 | Commands         | Description                                  |
 | :----------      |:------------------------------------------   |
 | FROM             | Image source                                 |
@@ -73,36 +103,36 @@ And [more](https://docs.docker.com/engine/reference/commandline/docker/) ...
 
 ![dockerfile](/docs/exemple_dockerfile.png)
 
-#### ENV
+### ENV
 - ARG is only available at runtime
 - ENV can be accessed even when the container created by the image will be launched
 - Environment variable = variables necessary for the very execution of the container and the application
 - Database credentials are often declared in environment variables.
 
-#### USER
+### USER
 - Determine the user or user group that can interact with the image that will be created.
 
-#### ADD
+### ADD
 - Allows you to copy a file or folder from an internal or external directory to a destination path.
 - Generally, this is the source code and dependencies of the application that will be running in the container.
 
-#### COPY
+### COPY
 - COPY and ADD act the same way BUT
 - COPY does not allow importing documents from a remote source such as a URL.
 - In general, COPY is used to avoid inconveniences caused by the use of external links authorized by ADD.
 - If the destination is not specified, the file or folder will be copied to the root of the file system of the created image.
 
-#### EXPOSE
+### EXPOSE
 - On the port that will be mentioned that the container will be accessible when a **docker run** command is executed.
 - Port exposed using the EXPOSE command can be overridden using the **docker run -p** command.
 
-#### CMD / ENTRYPOINT
+### CMD and ENTRYPOINT
 - CMD allows you to perform an action without the need for additional parameters
 - ENTRYPOINT is unchangeable and performs the same action throughout container activation. In this case, it acts as an executable file.
 
 ---
 
-## Docker-compose
+# Docker-compose
 - Allows you to start multiple containers at the same time
 - **docker-compose.yml**: required file that will serve as a guide to run the containers correctly
 - used to describe different containers
@@ -180,10 +210,10 @@ volumes:
             device: "/home/tpauvret/data/wordpress"
 ~~~
 
-### build
+## build
 - Specifies the build configuration for creating container image from source
 
-### command
+## command
 - Overrides the default command declared by the container images 
 - Can also be a list, similar to Dockerfile
 
@@ -193,6 +223,7 @@ command: bundle exec thin -p 3000
 command: [ "bundle", "exec", "thin", "-p", "3000" ]
 ~~~
 
+## Docker-compose commands
 ### depends-on
 - Expresses startup and shutdown dependencies between services
 - Compose implementations MUST create services in dependency order
@@ -300,10 +331,10 @@ There is some target :
 - target: the path in the container where the volume is mounted
 - read_only: flag to set the volume as read-only
 
-### EVERYTHING IS [HERE](https://docs.docker.com/compose/compose-file/)
+## EVERYTHING IS [HERE](https://docs.docker.com/compose/compose-file/)
 
 ---
-# SERVICES
+# Services
 
 I'll let you find it by yourselves, i'll only give you some docs to check
 
